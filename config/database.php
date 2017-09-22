@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+     'default' => $db_config['connection'],
 
     /*
     |--------------------------------------------------------------------------
@@ -65,8 +65,7 @@ return [
            'charset'  => 'utf8',
            'prefix'   => '',
            'schema'   => 'public',
-           'sslmode'  => 'require',
-        //    'sslmode'  => 'prefer',
+           'sslmode'  => 'prefer',
        ],
 
         'sqlsrv' => [
