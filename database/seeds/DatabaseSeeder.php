@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,11 +14,21 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UsersTableSeeder::class);
+        //
+        // Model::unguard();
+        //
+        // $this->call(UsersTableSeeder::class);
+        //
+        // Model::reguard();
+        $users = factory(User::class)->times(50)->make();
+        User::insert($users->makeVisible(['password', 'remember_token'])->toArray());
 
-        Model::unguard();
-
-        $this->call(UsersTableSeeder::class);
-
-        Model::reguard();
+        $user = User::find(1);
+        $user->name = 'Aufree';
+        $user->email = 'aufree@yousails.com';
+        $user->password = bcrypt('password');
+        $user->is_admin = true;
+        $user->activated = true;
+        $user->save();
     }
 }

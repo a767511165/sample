@@ -27,6 +27,15 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public static function boot()
+    {
+      parent::boot();
+
+      static::creating(function ($user) {
+          $user->activation_token = str_random(30);
+      });
+    }
+
 /**
 *1.为 gravatar 方法传递的参数 size 指定了默认值 100；
 *2.通过 $this->attributes['email'] 获取到用户的邮箱；
